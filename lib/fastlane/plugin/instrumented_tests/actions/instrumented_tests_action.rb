@@ -40,10 +40,10 @@ module Fastlane
       end
 
       def self.delete_old_emulators(params)
-        devices = `#{params[:sdk_path]}/tools/android list avd`.chomp
+        devices = `#{params[:sdk_path]}/tools/bin/avdmanager list avd`.chomp
 
         unless devices.match(/#{params[:avd_name]}/).nil?
-          Action.sh("#{params[:sdk_path]}/tools/android delete avd -n #{params[:avd_name]}")
+          Action.sh("#{params[:sdk_path]}/tools/bin/avdmanager delete avd -n #{params[:avd_name]}")
         end
       end
 
@@ -113,7 +113,7 @@ module Fastlane
         end
 
         UI.important("Deleting emulator...")
-        Action.sh("#{params[:sdk_path]}/tools/android delete avd -n #{params[:avd_name]}")
+        Action.sh("#{params[:sdk_path]}/tools/bin/avdmanager delete avd -n #{params[:avd_name]}")
       end
 
       def self.print_emulator_output(params)
